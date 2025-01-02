@@ -86,7 +86,7 @@ export async function GET() {
   try {
     file = await fs.readFile(
       process.cwd() + "/src/app/populate/styles.json",
-      "utf8"
+      "utf8",
     );
   } catch (error) {
     console.error(error);
@@ -116,15 +116,18 @@ export async function GET() {
 
     prisma.categories.createMany({
       data: Object.values(
-        data.reduce((acc, style) => {
-          if (!acc[style.categorynumber]) {
-            acc[style.categorynumber] = {
-              id: style.categorynumber,
-              name: style.category,
-            };
-          }
-          return acc;
-        }, {} as Record<string, { id: string; name: string }>)
+        data.reduce(
+          (acc, style) => {
+            if (!acc[style.categorynumber]) {
+              acc[style.categorynumber] = {
+                id: style.categorynumber,
+                name: style.category,
+              };
+            }
+            return acc;
+          },
+          {} as Record<string, { id: string; name: string }>,
+        ),
       ),
     }),
 
@@ -135,8 +138,8 @@ export async function GET() {
             style.tags.split(",").map((rawTag) => {
               const tag = rawTag.trim();
               return duplicatedTagsMap[tag] ?? tag;
-            })
-          )
+            }),
+          ),
         ),
       ].map((tag) => ({ id: tag, name: tag })),
     }),
@@ -178,7 +181,7 @@ export async function GET() {
           styleId,
           tagId: duplicatedTagsMap[tag] ?? tag,
         };
-      })
+      }),
     ),
   });
 

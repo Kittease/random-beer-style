@@ -24,12 +24,12 @@ const StyleCard = ({
     <Link
       href={`/styles/${id}`}
       className={cn(
-        "grid grid-cols-[auto_minmax(0,1fr)_auto] gap-2 md:gap-x-0 items-center bg-background border rounded-lg py-4 px-6 shadow hover:-translate-y-2 hover:scale-105 transition-all duration-150",
-        srmMinColor && srmMaxColor ? "md:pl-0" : "md:pl-6"
+        "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg border bg-background px-6 py-4 shadow transition-all duration-150 hover:-translate-y-2 hover:scale-105 md:gap-x-0",
+        srmMinColor && srmMaxColor ? "md:pl-0" : "md:pl-6",
       )}
     >
       {srmMinColor && srmMaxColor ? (
-        <svg viewBox="0 0 100 100" className="size-12 md:size-28 md:row-span-2">
+        <svg viewBox="0 0 100 100" className="size-12 md:row-span-2 md:size-28">
           <defs>
             <linearGradient
               id={`gradient-${id}`}
@@ -53,7 +53,7 @@ const StyleCard = ({
       <div
         className={cn(
           "flex flex-col",
-          (!srmMinColor || !srmMaxColor) && "col-span-2"
+          (!srmMinColor || !srmMaxColor) && "col-span-2",
         )}
       >
         <h1 className="text-xl font-bold">{name}</h1>
@@ -63,16 +63,16 @@ const StyleCard = ({
 
       <p
         className={cn(
-          "text-justify col-span-3 md:col-span-1 self-start",
-          (!srmMinColor || !srmMaxColor) && "md:col-span-2"
+          "col-span-3 self-start text-justify md:col-span-1",
+          (!srmMinColor || !srmMaxColor) && "md:col-span-2",
         )}
       >
         {overallImpression}
       </p>
 
-      <ChevronRight className="hidden md:block row-span-2 row-start-1 col-start-3 ml-6" />
+      <ChevronRight className="col-start-3 row-span-2 row-start-1 ml-6 hidden md:block" />
 
-      <p className="block md:hidden col-span-3 text-right text-yellow-700">
+      <p className="col-span-3 block text-right text-yellow-700 md:hidden">
         Read more
       </p>
     </Link>

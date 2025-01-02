@@ -23,11 +23,11 @@ const StyleHeader = ({
     <div
       className={cn(
         "grid grid-cols-[auto_minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)] gap-x-2 gap-y-2 md:gap-x-0",
-        srmMinColor && srmMaxColor && "items-center"
+        srmMinColor && srmMaxColor && "items-center",
       )}
     >
       {srmMinColor && srmMaxColor ? (
-        <svg viewBox="0 0 100 100" className="size-20 md:size-40 md:row-span-2">
+        <svg viewBox="0 0 100 100" className="size-20 md:row-span-2 md:size-40">
           <defs>
             <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
               <stop offset="0" stopColor={srmMaxColor} />
@@ -45,7 +45,7 @@ const StyleHeader = ({
       <div
         className={cn(
           "flex flex-col",
-          (!srmMinColor || !srmMaxColor) && "col-span-2"
+          (!srmMinColor || !srmMaxColor) && "col-span-2",
         )}
       >
         <h1 className="text-xl font-bold">{name}</h1>
@@ -60,8 +60,8 @@ const StyleHeader = ({
 
       <p
         className={cn(
-          "text-justify self-start col-span-2 md:col-span-1",
-          (!srmMinColor || !srmMaxColor) && "md:col-span-2"
+          "col-span-2 self-start text-justify md:col-span-1",
+          (!srmMinColor || !srmMaxColor) && "md:col-span-2",
         )}
       >
         {overallImpression}

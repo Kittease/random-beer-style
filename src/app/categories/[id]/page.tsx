@@ -16,7 +16,7 @@ interface CategoryPageProps {
 
 export async function generateMetadata(
   { params }: CategoryPageProps,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const category = await prisma.categories.findUnique({
     where: { id: (await params).id },
@@ -49,7 +49,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
 
   return (
     <div className="flex flex-col gap-y-12">
-      <h1 className="text-2xl md:text-3xl text-center font-bold">
+      <h1 className="text-center text-2xl font-bold md:text-3xl">
         {category.name} styles
       </h1>
 

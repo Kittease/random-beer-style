@@ -19,7 +19,7 @@ interface StylePageProps {
 
 export async function generateMetadata(
   { params }: StylePageProps,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const style = await prisma.styles.findUnique({
     where: { id: (await params).id },
@@ -64,7 +64,7 @@ const StylePage = async ({ params }: StylePageProps) => {
       (style.ibuMin && style.ibuMax) ||
       (style.ogMin && style.ogMax) ||
       (style.fgMin && style.fgMax) ? (
-        <dl className="flex flex-row flex-wrap gap-y-4 justify-between items-center py-4">
+        <dl className="flex flex-row flex-wrap items-center justify-between gap-y-4 py-4">
           {style.abvMin && style.abvMax ? (
             <div className="flex flex-col items-center">
               <dt className="font-bold">ABV</dt>

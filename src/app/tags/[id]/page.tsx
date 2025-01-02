@@ -16,7 +16,7 @@ interface TagPageProps {
 
 export async function generateMetadata(
   { params }: TagPageProps,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const tag = await prisma.tags.findUnique({
     where: { id: (await params).id },
@@ -51,7 +51,7 @@ const TagPage = async ({ params }: TagPageProps) => {
 
   return (
     <div className="flex flex-col gap-y-12">
-      <h1 className="text-2xl md:text-3xl text-center font-bold">
+      <h1 className="text-center text-2xl font-bold md:text-3xl">
         Styles tagged with {tag.name}
       </h1>
 

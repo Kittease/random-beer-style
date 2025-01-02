@@ -41,8 +41,8 @@ const RandomStylePage = async () => {
   const style = randomStyles[0];
 
   return (
-    <div className="min-h-[calc(100vh-theme(spacing.16))] w-full flex items-center justify-center">
-      <div className="flex flex-col gap-y-12 items-center">
+    <div className="flex min-h-[calc(100vh-theme(spacing.16))] w-full items-center justify-center">
+      <div className="flex flex-col items-center gap-y-12">
         <StyleHeader
           name={style.name}
           category={style.category}
@@ -54,10 +54,10 @@ const RandomStylePage = async () => {
 
         <Link
           href={`/styles/${style.id}`}
-          className="group flex flex-row gap-x-2 rounded-full border-2 px-4 py-2 w-fit border-foreground hover:scale-105 transition-all duration-300"
+          className="group flex w-fit flex-row gap-x-2 rounded-full border-2 border-foreground px-4 py-2 transition-all duration-300 hover:scale-105"
         >
           <span className="font-bold">Read more</span>
-          <ArrowRight className="group-hover:ml-1 transition-all duration-300" />
+          <ArrowRight className="transition-all duration-300 group-hover:ml-1" />
         </Link>
       </div>
     </div>

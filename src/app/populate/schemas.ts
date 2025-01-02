@@ -30,5 +30,5 @@ export const dataSchema = z.array(
     entryinstructions: z.string().optional(),
     currentlydefinedtypes: z.string().optional(),
     strengthclassifications: z.string().optional(),
-  })
+  }),
 );
