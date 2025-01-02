@@ -139,26 +139,6 @@ const StylePage = async ({ params }: StylePageProps) => {
 
       <dl className="flex flex-col gap-y-4 py-4">
         <div className="flex flex-col">
-          <dt className="font-bold">History</dt>
-          <dd className="text-justify">{style.history}</dd>
-        </div>
-
-        <div className="flex flex-col">
-          <dt className="font-bold">Characteristic Ingredients</dt>
-          <dd className="text-justify">{style.characteristicIngredients}</dd>
-        </div>
-
-        <div className="flex flex-col">
-          <dt className="font-bold">Style Comparison</dt>
-          <dd className="text-justify">{style.styleComparison}</dd>
-        </div>
-
-        <div className="flex flex-col">
-          <dt className="font-bold">Comments</dt>
-          <dd className="text-justify">{style.comments}</dd>
-        </div>
-
-        <div className="flex flex-col">
           <dt className="font-bold">Appearance</dt>
           <dd className="text-justify">{style.appearance}</dd>
         </div>
@@ -176,6 +156,26 @@ const StylePage = async ({ params }: StylePageProps) => {
         <div className="flex flex-col">
           <dt className="font-bold">Mouthfeel</dt>
           <dd className="text-justify">{style.mouthfeel}</dd>
+        </div>
+
+        <div className="flex flex-col">
+          <dt className="font-bold">History</dt>
+          <dd className="text-justify">{style.history}</dd>
+        </div>
+
+        <div className="flex flex-col">
+          <dt className="font-bold">Characteristic Ingredients</dt>
+          <dd className="text-justify">{style.characteristicIngredients}</dd>
+        </div>
+
+        <div className="flex flex-col">
+          <dt className="font-bold">Style Comparison</dt>
+          <dd className="text-justify">{style.styleComparison}</dd>
+        </div>
+
+        <div className="flex flex-col">
+          <dt className="font-bold">Comments</dt>
+          <dd className="text-justify">{style.comments}</dd>
         </div>
 
         <div className="flex flex-col">
