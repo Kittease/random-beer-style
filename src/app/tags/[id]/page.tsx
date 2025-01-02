@@ -56,17 +56,19 @@ const TagPage = async ({ params }: TagPageProps) => {
       </h1>
 
       <div className="flex flex-col gap-y-8">
-        {tag.styleTags.map(({ style }) => (
-          <StyleCard
-            key={style.id}
-            id={style.id}
-            name={style.name}
-            overallImpression={style.overallImpression}
-            srmMinColor={style.srmMinColor?.color}
-            srmMaxColor={style.srmMaxColor?.color}
-            category={style.category.name}
-          />
-        ))}
+        {tag.styleTags
+          .sort((a, b) => a.style.name.localeCompare(b.style.name))
+          .map(({ style }) => (
+            <StyleCard
+              key={style.id}
+              id={style.id}
+              name={style.name}
+              overallImpression={style.overallImpression}
+              srmMinColor={style.srmMinColor?.color}
+              srmMaxColor={style.srmMaxColor?.color}
+              category={style.category.name}
+            />
+          ))}
       </div>
     </div>
   );

@@ -36,6 +36,9 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
           srmMinColor: true,
           srmMaxColor: true,
         },
+        orderBy: {
+          name: "asc",
+        },
       },
     },
   });
