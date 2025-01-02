@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model categories {
+  id   String @id
+  name String
+
+  styles styles[]
+}
+
+model tags {
+  id   String @id()
+  name String
+
+  styleTags styleTags[]
+}
+
+model styles {
+  id                        String @id()
+  name                      String
+  overallImpression         String @map("overall_impression")
+  aroma                     String
+  appearance                String
+  flavor                    String
+  mouthfeel                 String
+  comments                  String
+  history                   String
+  characteristicIngredients String @map("characteristic_ingredients")
+  styleComparison           String @map("style_comparison")
+  commercialExamples        String @map("commercial_examples")
+  abvMin                    Float? @map("abv_min") @db.Real
+  abvMax                    Float? @map("abv_max") @db.Real
+  ibuMin                    Int?   @map("ibu_min") @db.SmallInt
+  ibuMax                    Int?   @map("ibu_max") @db.SmallInt
+  ogMin                     Float? @map("og_min") @db.Real
+  ogMax                     Float? @map("og_max") @db.Real
+  fgMin                     Float? @map("fg_min") @db.Real
+  fgMax                     Float? @map("fg_max") @db.Real
+
+  categoryId    String      @map("category_id")
+  categories    categories  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  styleTags     styleTags[]
+  srmMinColorId Int?        @map("srm_min_color_id")
+  srmMinColor   colors?     @relation("srm_min_color", fields: [srmMinColorId], references: [srm])
+  srmMaxColorId Int?        @map("srm_max_color_id")
+  srmMaxColor   colors?     @relation("srm_max_color", fields: [srmMaxColorId], references: [srm])
+}
+
+model styleTags {
+  styleId String @map("style_id")
+  styles  styles @relation(fields: [styleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tagId   String @map("tag_id")
+  tags    tags   @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([styleId, tagId])
+  @@map("style_tags")
+}
+
+model colors {
+  srm   Int    @id()
+  color String
+
+  stylesMin styles[] @relation("srm_min_color")
+  stylesMax styles[] @relation("srm_max_color")
+}
