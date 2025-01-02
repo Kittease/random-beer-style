@@ -14,9 +14,9 @@ const StyleHeader = ({
   srmMaxColor,
 }: StyleHeaderProps) => {
   return (
-    <div className="flex flex-row items-center">
+    <div className="grid grid-cols-[min-content_auto] gap-x-2 gap-y-2 md:gap-x-0 items-center">
       {srmMinColor && srmMaxColor ? (
-        <svg viewBox="0 0 100 100" className="size-40 shrink-0">
+        <svg viewBox="0 0 100 100" className="size-20 md:size-40 md:row-span-2">
           <defs>
             <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
               <stop offset="0" stopColor={srmMaxColor} />
@@ -31,14 +31,14 @@ const StyleHeader = ({
         </svg>
       ) : null}
 
-      <div className="flex flex-col gap-y-2">
-        <div className="flex flex-col">
-          <h1 className="text-xl font-bold">{name}</h1>
-          <p className="text-lg">{category}</p>
-        </div>
-
-        <p className="text-justify">{overallImpression}</p>
+      <div className="flex flex-col">
+        <h1 className="text-xl font-bold">{name}</h1>
+        <p className="text-lg">{category}</p>
       </div>
+
+      <p className="text-justify col-span-2 md:col-span-1">
+        {overallImpression}
+      </p>
     </div>
   );
 };

@@ -58,7 +58,7 @@ const StylePage = async ({ params }: StylePageProps) => {
         srmMaxColor={style.srmMaxColor?.color ?? undefined}
       />
 
-      <dl className="flex flex-row justify-between items-center pt-4 pb-8">
+      <dl className="grid grid-cols-2 gap-y-4 md:flex flex-row justify-between items-center pt-4 pb-8">
         {style.abvMin && style.abvMax ? (
           <div className="flex flex-col items-center">
             <dt className="font-bold">ABV</dt>
@@ -88,7 +88,7 @@ const StylePage = async ({ params }: StylePageProps) => {
         ) : null}
 
         {style.ogMin && style.ogMax ? (
-          <div className="flex flex-col items-center">
+          <div className="col-span-2 flex flex-col items-center">
             <dt className="font-bold">Original Gravity</dt>
 
             <dd className="flex flex-row items-center gap-x-2">
@@ -102,7 +102,7 @@ const StylePage = async ({ params }: StylePageProps) => {
         ) : null}
 
         {style.fgMin && style.fgMax ? (
-          <div className="flex flex-col items-center">
+          <div className="col-span-2 flex flex-col items-center">
             <dt className="font-bold">Final Gravity</dt>
 
             <dd className="flex flex-row items-center gap-x-2">
