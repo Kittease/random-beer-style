@@ -11,6 +11,7 @@ type RawQueryResult = {
   id: string;
   name: string;
   overall_impression: string;
+  category_id: string;
   category: string;
   srm_min_color: string;
   srm_max_color: string;
@@ -21,6 +22,7 @@ const RandomStylePage = async () => {
     styles.id,
     styles.name,
     styles.overall_impression,
+    categories.id AS category_id,
     categories.name AS category,
     srm_min_colors.color AS srm_min_color,
     srm_max_colors.color AS srm_max_color
@@ -44,6 +46,7 @@ const RandomStylePage = async () => {
         <StyleHeader
           name={style.name}
           category={style.category}
+          categoryId={style.category_id}
           overallImpression={style.overall_impression}
           srmMinColor={style.srm_min_color}
           srmMaxColor={style.srm_max_color}

@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 interface StyleHeaderProps {
   name: string;
   category: string;
+  categoryId: string;
   overallImpression: string;
   srmMinColor?: string;
   srmMaxColor?: string;
@@ -9,6 +12,7 @@ interface StyleHeaderProps {
 const StyleHeader = ({
   name,
   category,
+  categoryId,
   overallImpression,
   srmMinColor,
   srmMaxColor,
@@ -33,7 +37,12 @@ const StyleHeader = ({
 
       <div className="flex flex-col">
         <h1 className="text-xl font-bold">{name}</h1>
-        <p className="text-lg">{category}</p>
+        <Link
+          href={`/categories/${categoryId}`}
+          className="text-lg text-yellow-700"
+        >
+          {category}
+        </Link>
       </div>
 
       <p className="text-justify col-span-2 md:col-span-1">

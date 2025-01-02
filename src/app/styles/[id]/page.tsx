@@ -1,9 +1,8 @@
 import { Minus, Plus, TrendingUp } from "lucide-react";
+import { Metadata, ResolvingMetadata } from "next";
 
-import prisma from "@/lib/prisma";
 import StyleHeader from "@/app/_components/style-header";
-import { ResolvingMetadata } from "next";
-import { Metadata } from "next";
+import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
   const styles = await prisma.styles.findMany();
@@ -53,6 +52,7 @@ const StylePage = async ({ params }: StylePageProps) => {
       <StyleHeader
         name={style.name}
         category={style.categories.name}
+        categoryId={style.categories.id}
         overallImpression={style.overallImpression}
         srmMinColor={style.srmMinColor?.color ?? undefined}
         srmMaxColor={style.srmMaxColor?.color ?? undefined}
