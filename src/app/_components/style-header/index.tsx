@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { cn } from "@/lib/utils";
+
 interface StyleHeaderProps {
   name: string;
   category: string;
@@ -18,7 +20,12 @@ const StyleHeader = ({
   srmMaxColor,
 }: StyleHeaderProps) => {
   return (
-    <div className="grid grid-cols-[min-content_auto] gap-x-2 gap-y-2 md:gap-x-0 items-center">
+    <div
+      className={cn(
+        "grid grid-cols-[auto_minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)] gap-x-2 gap-y-2 md:gap-x-0",
+        srmMinColor && srmMaxColor && "items-center"
+      )}
+    >
       {srmMinColor && srmMaxColor ? (
         <svg viewBox="0 0 100 100" className="size-20 md:size-40 md:row-span-2">
           <defs>
@@ -35,8 +42,14 @@ const StyleHeader = ({
         </svg>
       ) : null}
 
-      <div className="flex flex-col">
+      <div
+        className={cn(
+          "flex flex-col",
+          (!srmMinColor || !srmMaxColor) && "col-span-2"
+        )}
+      >
         <h1 className="text-xl font-bold">{name}</h1>
+
         <Link
           href={`/categories/${categoryId}`}
           className="text-lg text-yellow-700"
@@ -45,7 +58,12 @@ const StyleHeader = ({
         </Link>
       </div>
 
-      <p className="text-justify col-span-2 md:col-span-1">
+      <p
+        className={cn(
+          "text-justify self-start col-span-2 md:col-span-1",
+          (!srmMinColor || !srmMaxColor) && "md:col-span-2"
+        )}
+      >
         {overallImpression}
       </p>
     </div>

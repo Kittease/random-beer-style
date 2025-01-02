@@ -1,6 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
+import { cn } from "@/lib/utils";
+
 type StyleCardProps = {
   id: string;
   name: string;
@@ -21,7 +23,10 @@ const StyleCard = ({
   return (
     <Link
       href={`/styles/${id}`}
-      className="grid grid-cols-[min-content_auto_min-content] gap-2 md:gap-x-0 items-center bg-background border rounded-lg py-4 px-6 md:pl-0 shadow hover:-translate-y-2 hover:scale-105 transition-all duration-150"
+      className={cn(
+        "grid grid-cols-[auto_minmax(0,1fr)_auto] gap-2 md:gap-x-0 items-center bg-background border rounded-lg py-4 px-6 shadow hover:-translate-y-2 hover:scale-105 transition-all duration-150",
+        srmMinColor && srmMaxColor ? "md:pl-0" : "md:pl-6"
+      )}
     >
       {srmMinColor && srmMaxColor ? (
         <svg viewBox="0 0 100 100" className="size-12 md:size-28 md:row-span-2">
@@ -45,13 +50,23 @@ const StyleCard = ({
         </svg>
       ) : null}
 
-      <div className="flex flex-col">
+      <div
+        className={cn(
+          "flex flex-col",
+          (!srmMinColor || !srmMaxColor) && "col-span-2"
+        )}
+      >
         <h1 className="text-xl font-bold">{name}</h1>
 
         {category ? <p className="text-lg">{category}</p> : null}
       </div>
 
-      <p className="text-justify col-span-3 md:col-span-1 self-start">
+      <p
+        className={cn(
+          "text-justify col-span-3 md:col-span-1 self-start",
+          (!srmMinColor || !srmMaxColor) && "md:col-span-2"
+        )}
+      >
         {overallImpression}
       </p>
 

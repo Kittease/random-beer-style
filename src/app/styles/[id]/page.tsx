@@ -60,7 +60,11 @@ const StylePage = async ({ params }: StylePageProps) => {
         srmMaxColor={style.srmMaxColor?.color ?? undefined}
       />
 
-      <dl className="grid grid-cols-2 gap-y-4 md:flex flex-row justify-between items-center pt-4 pb-8">
+      {(style.abvMin && style.abvMax) ||
+      (style.ibuMin && style.ibuMax) ||
+      (style.ogMin && style.ogMax) ||
+      (style.fgMin && style.fgMax) ? (
+        <dl className="flex flex-row flex-wrap gap-y-4 justify-between items-center py-4">
         {style.abvMin && style.abvMax ? (
           <div className="flex flex-col items-center">
             <dt className="font-bold">ABV</dt>
@@ -90,7 +94,7 @@ const StylePage = async ({ params }: StylePageProps) => {
         ) : null}
 
         {style.ogMin && style.ogMax ? (
-          <div className="col-span-2 flex flex-col items-center">
+            <div className="flex flex-col items-center">
             <dt className="font-bold">Original Gravity</dt>
 
             <dd className="flex flex-row items-center gap-x-2">
@@ -104,7 +108,7 @@ const StylePage = async ({ params }: StylePageProps) => {
         ) : null}
 
         {style.fgMin && style.fgMax ? (
-          <div className="col-span-2 flex flex-col items-center">
+            <div className="flex flex-col items-center">
             <dt className="font-bold">Final Gravity</dt>
 
             <dd className="flex flex-row items-center gap-x-2">
@@ -117,8 +121,9 @@ const StylePage = async ({ params }: StylePageProps) => {
           </div>
         ) : null}
       </dl>
+      ) : null}
 
-      <dl className="flex flex-col gap-y-4">
+      <dl className="flex flex-col gap-y-4 py-4">
         <div className="flex flex-col">
           <dt className="font-bold">History</dt>
           <dd className="text-justify">{style.history}</dd>
@@ -165,7 +170,7 @@ const StylePage = async ({ params }: StylePageProps) => {
         </div>
       </dl>
 
-      <span className="pt-8">
+      <span className="pt-4">
         {style.styleTags.map(({ tag }, i) => (
           <Fragment key={tag.id}>
             <Link href={`/tags/${tag.id}`} className="text-yellow-700">
