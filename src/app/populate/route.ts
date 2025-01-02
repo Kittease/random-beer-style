@@ -141,7 +141,13 @@ export async function GET() {
             }),
           ),
         ),
-      ].map((tag) => ({ id: tag, name: tag })),
+      ].map((tag) => ({
+        id: tag,
+        name: tag
+          .split("-")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join(" "),
+      })),
     }),
   ]);
 

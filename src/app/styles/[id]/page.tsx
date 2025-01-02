@@ -41,6 +41,11 @@ const StylePage = async ({ params }: StylePageProps) => {
         include: {
           tag: true,
         },
+        orderBy: {
+          tag: {
+            name: "asc",
+          },
+        },
       },
     },
   });
