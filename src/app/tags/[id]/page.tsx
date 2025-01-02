@@ -4,54 +4,59 @@ import StyleCard from "@/app/_components/style-card";
 import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
-  const categories = await prisma.categories.findMany();
-  return categories.map((category) => ({ id: category.id }));
+  const tags = await prisma.tags.findMany();
+  return tags.map((tag) => ({ id: tag.id }));
 }
 
-interface CategoryPageProps {
+interface TagPageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
 export async function generateMetadata(
-  { params }: CategoryPageProps,
+  { params }: TagPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const category = await prisma.categories.findUnique({
+  const tag = await prisma.tags.findUnique({
     where: { id: (await params).id },
   });
 
   return {
-    title: category?.name ?? (await parent).title,
+    title: tag?.name ?? (await parent).title,
   };
 }
 
-const CategoryPage = async ({ params }: CategoryPageProps) => {
-  const category = await prisma.categories.findUnique({
+const TagPage = async ({ params }: TagPageProps) => {
+  const tag = await prisma.tags.findUnique({
     where: { id: (await params).id },
     include: {
-      styles: {
+      styleTags: {
         include: {
-          srmMinColor: true,
-          srmMaxColor: true,
+          style: {
+            include: {
+              category: true,
+              srmMinColor: true,
+              srmMaxColor: true,
+            },
+          },
         },
       },
     },
   });
 
-  if (!category) {
-    return <div>Category not found</div>;
+  if (!tag) {
+    return <div>Tag not found</div>;
   }
 
   return (
     <div className="flex flex-col gap-y-12">
       <h1 className="text-2xl md:text-3xl text-center font-bold">
-        {category.name} styles
+        Styles tagged with {tag.name}
       </h1>
 
       <div className="flex flex-col gap-y-8">
-        {category.styles.map((style) => (
+        {tag.styleTags.map(({ style }) => (
           <StyleCard
             key={style.id}
             id={style.id}
@@ -59,6 +64,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
             overallImpression={style.overallImpression}
             srmMinColor={style.srmMinColor?.color}
             srmMaxColor={style.srmMaxColor?.color}
+            category={style.category.name}
           />
         ))}
       </div>
@@ -66,4 +72,4 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   );
 };
 
-export default CategoryPage;
+export default TagPage;

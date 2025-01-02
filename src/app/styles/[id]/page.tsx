@@ -1,5 +1,7 @@
 import { Minus, Plus, TrendingUp } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
+import Link from "next/link";
+import { Fragment } from "react";
 
 import StyleHeader from "@/app/_components/style-header";
 import prisma from "@/lib/prisma";
@@ -32,12 +34,12 @@ const StylePage = async ({ params }: StylePageProps) => {
   const style = await prisma.styles.findUnique({
     where: { id: (await params).id },
     include: {
-      categories: true,
+      category: true,
       srmMinColor: true,
       srmMaxColor: true,
       styleTags: {
         include: {
-          tags: true,
+          tag: true,
         },
       },
     },
@@ -51,8 +53,8 @@ const StylePage = async ({ params }: StylePageProps) => {
     <div className="flex flex-col gap-y-4">
       <StyleHeader
         name={style.name}
-        category={style.categories.name}
-        categoryId={style.categories.id}
+        category={style.category.name}
+        categoryId={style.category.id}
         overallImpression={style.overallImpression}
         srmMinColor={style.srmMinColor?.color ?? undefined}
         srmMaxColor={style.srmMaxColor?.color ?? undefined}
@@ -164,7 +166,15 @@ const StylePage = async ({ params }: StylePageProps) => {
       </dl>
 
       <span className="pt-8">
-        {style.styleTags.map((tag) => tag.tags.name).join(", ")}
+        {style.styleTags.map(({ tag }, i) => (
+          <Fragment key={tag.id}>
+            <Link href={`/tags/${tag.id}`} className="text-yellow-700">
+              {tag.name}
+            </Link>
+
+            {i < style.styleTags.length - 1 ? ", " : null}
+          </Fragment>
+        ))}
       </span>
     </div>
   );

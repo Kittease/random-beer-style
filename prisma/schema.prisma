@@ -45,7 +45,7 @@ model styles {
   fgMax                     Float? @map("fg_max") @db.Real
 
   categoryId    String      @map("category_id")
-  categories    categories  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category      categories  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   styleTags     styleTags[]
   srmMinColorId Int?        @map("srm_min_color_id")
   srmMinColor   colors?     @relation("srm_min_color", fields: [srmMinColorId], references: [srm])
@@ -55,9 +55,9 @@ model styles {
 
 model styleTags {
   styleId String @map("style_id")
-  styles  styles @relation(fields: [styleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  style   styles @relation(fields: [styleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   tagId   String @map("tag_id")
-  tags    tags   @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tag     tags   @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([styleId, tagId])
   @@map("style_tags")
