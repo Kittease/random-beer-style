@@ -65,62 +65,76 @@ const StylePage = async ({ params }: StylePageProps) => {
       (style.ogMin && style.ogMax) ||
       (style.fgMin && style.fgMax) ? (
         <dl className="flex flex-row flex-wrap gap-y-4 justify-between items-center py-4">
-        {style.abvMin && style.abvMax ? (
-          <div className="flex flex-col items-center">
-            <dt className="font-bold">ABV</dt>
-
-            <dd className="flex flex-row items-center gap-x-2">
-              <Minus className="size-3 text-gray-400" />
-              <span>{style.abvMin}</span>
-              <TrendingUp className="size-5 text-gray-400" />
-              <span>{style.abvMax}</span>
-              <Plus className="size-3 text-gray-400" />
-            </dd>
-          </div>
-        ) : null}
-
-        {style.ibuMin && style.ibuMax ? (
-          <div className="flex flex-col items-center">
-            <dt className="font-bold">IBU</dt>
-
-            <dd className="flex flex-row items-center gap-x-2">
-              <Minus className="size-3 text-gray-400" />
-              <span>{style.ibuMin}</span>
-              <TrendingUp className="size-5 text-gray-400" />
-              <span>{style.ibuMax}</span>
-              <Plus className="size-3 text-gray-400" />
-            </dd>
-          </div>
-        ) : null}
-
-        {style.ogMin && style.ogMax ? (
+          {style.abvMin && style.abvMax ? (
             <div className="flex flex-col items-center">
-            <dt className="font-bold">Original Gravity</dt>
+              <dt className="font-bold">ABV</dt>
 
-            <dd className="flex flex-row items-center gap-x-2">
-              <Minus className="size-3 text-gray-400" />
-              <span>{style.ogMin.toFixed(3)}</span>
-              <TrendingUp className="size-5 text-gray-400" />
-              <span>{style.ogMax.toFixed(3)}</span>
-              <Plus className="size-3 text-gray-400" />
-            </dd>
-          </div>
-        ) : null}
+              <dd className="flex flex-row items-center gap-x-2">
+                <Minus className="size-3 text-gray-400" />
+                <span>{style.abvMin}</span>
+                <TrendingUp className="size-5 text-gray-400" />
+                <span>{style.abvMax}</span>
+                <Plus className="size-3 text-gray-400" />
+              </dd>
+            </div>
+          ) : null}
 
-        {style.fgMin && style.fgMax ? (
+          {style.ibuMin && style.ibuMax ? (
             <div className="flex flex-col items-center">
-            <dt className="font-bold">Final Gravity</dt>
+              <dt className="font-bold">IBU</dt>
 
-            <dd className="flex flex-row items-center gap-x-2">
-              <Minus className="size-3 text-gray-400" />
-              <span>{style.fgMin.toFixed(3)}</span>
-              <TrendingUp className="size-5 text-gray-400" />
-              <span>{style.fgMax.toFixed(3)}</span>
-              <Plus className="size-3 text-gray-400" />
-            </dd>
-          </div>
-        ) : null}
-      </dl>
+              <dd className="flex flex-row items-center gap-x-2">
+                <Minus className="size-3 text-gray-400" />
+                <span>{style.ibuMin}</span>
+                <TrendingUp className="size-5 text-gray-400" />
+                <span>{style.ibuMax}</span>
+                <Plus className="size-3 text-gray-400" />
+              </dd>
+            </div>
+          ) : null}
+
+          {style.srmMinColor && style.srmMaxColor ? (
+            <div className="flex flex-col items-center">
+              <dt className="font-bold">EBC</dt>
+
+              <dd className="flex flex-row items-center gap-x-2">
+                <Minus className="size-3 text-gray-400" />
+                <span>{Math.round(style.srmMinColor.srm * 1.97)}</span>
+                <TrendingUp className="size-5 text-gray-400" />
+                <span>{Math.round(style.srmMaxColor.srm * 1.97)}</span>
+                <Plus className="size-3 text-gray-400" />
+              </dd>
+            </div>
+          ) : null}
+
+          {style.ogMin && style.ogMax ? (
+            <div className="flex flex-col items-center">
+              <dt className="font-bold">Original Gravity</dt>
+
+              <dd className="flex flex-row items-center gap-x-2">
+                <Minus className="size-3 text-gray-400" />
+                <span>{style.ogMin.toFixed(3)}</span>
+                <TrendingUp className="size-5 text-gray-400" />
+                <span>{style.ogMax.toFixed(3)}</span>
+                <Plus className="size-3 text-gray-400" />
+              </dd>
+            </div>
+          ) : null}
+
+          {style.fgMin && style.fgMax ? (
+            <div className="flex flex-col items-center">
+              <dt className="font-bold">Final Gravity</dt>
+
+              <dd className="flex flex-row items-center gap-x-2">
+                <Minus className="size-3 text-gray-400" />
+                <span>{style.fgMin.toFixed(3)}</span>
+                <TrendingUp className="size-5 text-gray-400" />
+                <span>{style.fgMax.toFixed(3)}</span>
+                <Plus className="size-3 text-gray-400" />
+              </dd>
+            </div>
+          ) : null}
+        </dl>
       ) : null}
 
       <dl className="flex flex-col gap-y-4 py-4">
