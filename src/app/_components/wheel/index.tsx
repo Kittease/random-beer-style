@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 import Link from "next/link";
 
 import StyleHeader from "@/app/_components/style-header";
+import { useSearchParams } from "next/navigation";
 
 type StyleProps = ComponentProps<typeof StyleHeader> & {
   id: string;
@@ -27,6 +28,9 @@ const Wheel = ({ styles, defaultGradientStops }: WheelProps) => {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [style, setStyle] = useState<StyleProps | null>(null);
+
+  const searchParams = useSearchParams();
+  const spinByDefault = searchParams.get("spin") === "true";
 
   const spinWheel = () => {
     if (isSpinning) {
@@ -52,6 +56,13 @@ const Wheel = ({ styles, defaultGradientStops }: WheelProps) => {
       (animationDuration - revealDuration) * 1000,
     );
   };
+
+  useEffect(() => {
+    if (spinByDefault) {
+      spinWheel();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-y-8">
